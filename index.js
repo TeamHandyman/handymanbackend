@@ -14,11 +14,11 @@ mongoose.connect('mongodb://localhost:27017/test')
 
 
 app.post('/api/login', async (req, res) => {
-	console.log(req.body)
+	//console.log(req.body)
 	const user = await User.findOne({
 		email: req.body.email,
 	})
-	console.log(okay);
+	
 	if (!user) {
 		return { status: 'error', error: 'Invalid login' }
 	}
