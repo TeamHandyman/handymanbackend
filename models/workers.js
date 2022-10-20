@@ -38,6 +38,10 @@ const workerSchema = mongoose.Schema(
         type: String,
         required: [true, 'Please add a text value'],
       },
+      userType: {
+        type: String,
+        required: [true, 'Please add a text value'],
+      },
     },
     {
       timestamps: true,

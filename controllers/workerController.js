@@ -6,6 +6,15 @@ const getWorker = asyncHandler(async (req, res) => {
     res.send(workers)
   })
 
+  const getWorkerbyId = asyncHandler(async (req, res) => {
+    const workers = await Worker.findById(req.params.id)
+    if (!workers) {
+      res.status(400)
+      throw new Error('worker not found')
+    }
+    res.send(workers)
+  })
+
   const updateStatus =asyncHandler( async(req, res) => {
     const status = await Worker.findById(req.params.id)
 
@@ -26,5 +35,5 @@ const getWorker = asyncHandler(async (req, res) => {
     })
 
   module.exports = {
-    getWorker, updateStatus, getCus
+    getWorker, updateStatus, getCus, getWorkerbyId
 }
