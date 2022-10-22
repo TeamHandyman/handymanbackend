@@ -2,12 +2,12 @@ const asyncHandler = require('express-async-handler')
 const Worker = require('../models/workers')
 
 const getWorker = asyncHandler(async (req, res) => {
-    const workers = await Worker.find({ "accountStatus": "pending"})
+    const workers = await Worker.find({ userType: "worker",accountStatus: "pending"})
     res.send(workers)
   })
 
   const getWorkerbyId = asyncHandler(async (req, res) => {
-    const workers = await Worker.findById(req.params.id)
+    const workers = await Worker.findById(req.params.workerID)
     if (!workers) {
       res.status(400)
       throw new Error('worker not found')
