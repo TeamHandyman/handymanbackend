@@ -6,7 +6,8 @@ const connection = require("./db");
 //const userRoutes = require("./routes/users");
 const authRoutes = require("./routes/auth");
 const workerRoutes = require("./routes/worker");
-const ticketsRoutes = require("./routes/tickets")
+const ticketsRoutes = require("./routes/tickets");
+const jobRoutes = require("./routes/jobs")
 // database connection
 connection();
 
@@ -19,6 +20,7 @@ app.use(cors());
 app.use("/api/auth", authRoutes);
 app.use("/api/worker", workerRoutes);
 app.use("/api/tickets", ticketsRoutes);
+app.use("/api/jobs", jobRoutes);
 
 const port = process.env.PORT || 1337;
 app.listen(port, console.log(`Listening on port ${port}...`));
