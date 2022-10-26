@@ -1,8 +1,23 @@
 const asyncHandler = require('express-async-handler')
 const Worker = require('../models/workers')
 
+const getAllWorker = asyncHandler(async (req, res) => {
+  const workers = await Worker.find({ userType: "worker"})
+  res.send(workers)
+})
+
+
 const getWorker = asyncHandler(async (req, res) => {
-    const workers = await Worker.find({ userType: "worker"})
+    const workers = await Worker.find({ userType: "worker", accountStatus: "pending"})
+    res.send(workers)
+  })
+  const getAccepted = asyncHandler(async (req, res) => {
+    const workers = await Worker.find({ userType: "worker", accountStatus: "Accept"})
+    res.send(workers)
+  })
+
+  const getRejected = asyncHandler(async (req, res) => {
+    const workers = await Worker.find({ userType: "worker", accountStatus: "Reject"})
     res.send(workers)
   })
 
@@ -42,11 +57,7 @@ const getWorker = asyncHandler(async (req, res) => {
       res.send(cust)
     })
 
-  const getWorkerCount = asyncHandler(async (req, res)=> {
-    const rowCount = await Worker.find({}).select({_id: 0, fname: 1})
-    console.log(rowCount)
-    res.send(rowCount)
-  })  
+   
   const getClientCount = asyncHandler(async (req, res)=> {
     const rowCount = await Worker.countDocuments({userType: "customer"})
     res.send(rowCount)
@@ -63,5 +74,5 @@ const getWorker = asyncHandler(async (req, res) => {
       {new: true})
     })
   module.exports = {
-    getWorker, updateStatus, getCus, getWorkerbyId, getCusbyId, getWorkerCount, changeStatus, getClientCount
+    getWorker, updateStatus, getCus, getWorkerbyId, getCusbyId,getAllWorker, changeStatus, getClientCount, getAccepted, getRejected
 }
